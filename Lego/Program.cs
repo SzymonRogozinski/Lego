@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lego
 {
@@ -10,7 +6,8 @@ namespace Lego
     {
         static void Main(string[] args)
         {
-            Character c = new Character(new Brick("Czerwona czapka"),
+            Character c = new Character("Skate kid",
+                new Brick("Czerwona czapka"),
                 new Brick("Żółta głowa"),
                 new Brick("Koszula w kratę"),
                 new Brick("Niebieskie spodnie"));
@@ -18,6 +15,14 @@ namespace Lego
             Console.WriteLine(c);
             Console.Beep();
             Console.ReadKey();
+            c.WaveHand();
+            Console.ReadKey();
+        }
+
+        static void TrowOutIntoBox()
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
     }
 
@@ -25,9 +30,14 @@ namespace Lego
     {
         private string name;
 
-        internal Brick(string name) 
+        internal Brick(string name)
         {
-            this.name = name;   
+            this.name = name;
+        }
+
+        ~Brick()
+        {
+            Console.WriteLine(name + " został wrzucony do pudełka");
         }
 
         public override string ToString()
@@ -38,14 +48,46 @@ namespace Lego
 
     internal class Character
     {
-        Brick top_head;
-        Brick head;
-        Brick between_head_and_torso;
-        Brick arms_and_torso;
-        Brick legs;
+        public string name { get; }
+        public Brick top_head { get; set; }
+        public Brick head { get; set; }
+        public Brick between_head_and_torso { get; set; }
+        public Brick arms_and_torso { get; set; }
+        public Brick legs { get; set; }
 
-        public Character(Brick top_head, Brick head, Brick between_head_and_torso, Brick arms_and_torso, Brick legs)
+        public Brick in_right_hand
         {
+            get
+            {
+                if (in_right_hand == null)
+                    Console.WriteLine("Postać nie trzyma nic w prawej ręce!");
+                return in_right_hand;
+            }
+            set
+            {
+                Console.WriteLine("Postać podniosła " + value.ToString());
+                in_right_hand = value;
+            }
+        }
+
+        public Brick in_left_hand
+        {
+            get
+            {
+                if (in_left_hand == null)
+                    Console.WriteLine("Postać nie trzyma nic w lewej ręce!");
+                return in_left_hand;
+            }
+            set
+            {
+                Console.WriteLine("Postać podniosła " + value.ToString());
+                in_left_hand = value;
+            }
+        }
+
+        public Character(string name, Brick top_head, Brick head, Brick between_head_and_torso, Brick arms_and_torso, Brick legs)
+        {
+            this.name = name;
             this.top_head = top_head;
             this.head = head;
             this.between_head_and_torso = between_head_and_torso;
@@ -53,8 +95,9 @@ namespace Lego
             this.legs = legs;
         }
 
-        public Character(Brick top_head, Brick head, Brick arms_and_torso, Brick legs)
+        public Character(string name, Brick top_head, Brick head, Brick arms_and_torso, Brick legs)
         {
+            this.name = name;
             this.top_head = top_head;
             this.head = head;
             between_head_and_torso = null;
@@ -62,11 +105,17 @@ namespace Lego
             this.legs = legs;
         }
 
+        public void WaveHand()
+        {
+            Console.WriteLine(name + " macha do Ciebie");
+        }
+
         public override string ToString()
         {
-            return top_head.ToString()+"\n"
-                +head.ToString() + "\n"
-                + (between_head_and_torso==null ? "" : between_head_and_torso.ToString()+ "\n")
+            return name + " składa się z:\n"
+                + top_head.ToString() + "\n"
+                + head.ToString() + "\n"
+                + (between_head_and_torso == null ? "" : between_head_and_torso.ToString() + "\n")
                 + arms_and_torso.ToString() + "\n"
                 + legs.ToString();
         }
