@@ -6,16 +6,13 @@ namespace Lego
     {
         static void Main(string[] args)
         {
-            Character c = new Character("Skate kid",
-                new Brick("Czerwona czapka"),
-                new Brick("Żółta głowa"),
-                new Brick("Koszula w kratę"),
-                new Brick("Niebieskie spodnie"));
-
+            RockMonster c = new RockMonster("Czerwony stwór",
+                new Brick("Czerwony kloc"),
+                new Brick("Czerwony kryształ"));
             Console.WriteLine(c);
             Console.Beep();
             Console.ReadKey();
-            c.WaveHand();
+            c.Eaten = new Brick("Niebieski kryształ");
             Console.ReadKey();
         }
 
@@ -84,6 +81,10 @@ namespace Lego
                 in_left_hand = value;
             }
         }
+        public Character(string name)
+        {
+            this.name = name;
+        }
 
         public Character(string name, Brick top_head, Brick head, Brick between_head_and_torso, Brick arms_and_torso, Brick legs)
         {
@@ -120,4 +121,44 @@ namespace Lego
                 + legs.ToString();
         }
     }
+
+    internal class RockMonster : Character
+    {
+        public Brick body { get; }
+        private Brick eaten; 
+        
+        public Brick Eaten
+        {
+            get 
+            {
+                if (eaten is null)
+                    Console.WriteLine(name+" nic nie połknął!");
+                return eaten; 
+            }
+            set 
+            {
+                if (!(eaten is null))
+                    Console.WriteLine(eaten+" zostaję zastąpionę przez "+value);
+                eaten=value; 
+            }
+        }
+
+        public RockMonster(string name,Brick body ) : base(name)
+        {
+            this.body = body;
+        }
+
+        public RockMonster(string name, Brick body,Brick eaten) : base(name)
+        {
+            this.body = body;
+            this.eaten = eaten;
+        }
+
+        public override string ToString()
+        {
+            return name + (eaten != null ? "z "+eaten.ToString()+" w brzuchu":"") ;
+        }
+
+    }
+
 }
