@@ -15,7 +15,7 @@ namespace Lego
             Console.WriteLine(c);
             Console.Beep();
             Console.ReadKey();
-            c.WaveHand();
+            Console.WriteLine(c.InLeftHand);
             Console.ReadKey();
         }
 
@@ -55,7 +55,9 @@ namespace Lego
         public Brick arms_and_torso { get; set; }
         public Brick legs { get; set; }
 
-        public Brick in_right_hand
+        private Brick in_right_hand;
+
+        public Brick InRightHand
         {
             get
             {
@@ -70,7 +72,9 @@ namespace Lego
             }
         }
 
-        public Brick in_left_hand
+        private Brick in_left_hand;
+        
+        public Brick InLeftHand
         {
             get
             {
