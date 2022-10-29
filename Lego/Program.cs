@@ -13,6 +13,7 @@ namespace Lego
             Console.Beep();
             Console.ReadKey();
             c.Eaten = new Brick("Niebieski kryształ");
+            c.top_head = new Brick("");
             Console.ReadKey();
         }
 
@@ -52,7 +53,9 @@ namespace Lego
         public Brick arms_and_torso { get; set; }
         public Brick legs { get; set; }
 
-        public Brick in_right_hand
+        private Brick in_right_hand;
+
+        public Brick InRightHand
         {
             get
             {
@@ -67,7 +70,9 @@ namespace Lego
             }
         }
 
-        public Brick in_left_hand
+        private Brick in_left_hand;
+
+        public Brick InLeftHand
         {
             get
             {
@@ -101,7 +106,7 @@ namespace Lego
             this.name = name;
             this.top_head = top_head;
             this.head = head;
-            between_head_and_torso = null;
+            this.between_head_and_torso = null;
             this.arms_and_torso = arms_and_torso;
             this.legs = legs;
         }
@@ -125,8 +130,13 @@ namespace Lego
     internal class RockMonster : Character
     {
         public Brick body { get; }
-        private Brick eaten; 
-        
+        private Brick eaten;
+        new public static Brick top_head { get; }
+        new public static Brick head { get; }
+        new public static Brick between_head_and_torso { get; }
+        new public static Brick arms_and_torso { get; }
+        new public static Brick legs { get; }
+
         public Brick Eaten
         {
             get 
