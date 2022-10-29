@@ -6,19 +6,7 @@ namespace Lego
     {
         static void Main(string[] args)
         {
-            /*Character c = new Human("Skate kid",
-                new Brick("Czerwona czapka"),
-                new Brick("Żółta głowa"),
-                new Brick("Koszula w kratę"),
-                new Brick("Niebieskie spodnie"));
 
-            Console.WriteLine(c);
-            Console.Beep();
-            Console.ReadKey();*/
-            //Console.WriteLine(c.InLeftHand);
-            RockMonster r = new RockMonster("Niebieski gnuj",new Brick("Niebieski kloc"));
-            Console.WriteLine(r.body);
-            Console.WriteLine(r.name);
             Console.ReadKey();
         }
 
@@ -81,7 +69,6 @@ namespace Lego
         {
             Console.WriteLine(name + " macha do Ciebie");
         }
-
     }
 
     internal class Human:Character 
@@ -127,12 +114,32 @@ namespace Lego
     {
         public Brick body { get; }
 
+        private Brick eaten;
+        public Brick Eaten
+        {
+            get
+            {
+                if (eaten is null)
+                    Console.WriteLine(name + " nic nie połknął!");
+                return eaten;
+            }
+            set
+            {
+                if (!(eaten is null))
+                    Console.WriteLine(eaten + " zostaję zastąpionę przez " + value);
+                eaten = value;
+            }
+        }
+
         public RockMonster(string name,Brick body)
         {
             this.name = name;
             this.body = body;
         }
 
-
+        public override string ToString()
+        {
+            return name + (eaten != null ? "z " + eaten.ToString() + " w brzuchu" : "");
+        }
     }
 }
