@@ -6,7 +6,7 @@ namespace Lego
     {
         static void Main(string[] args)
         {
-            Character c = new Character("Skate kid",
+            /*Character c = new Human("Skate kid",
                 new Brick("Czerwona czapka"),
                 new Brick("Żółta głowa"),
                 new Brick("Koszula w kratę"),
@@ -14,16 +14,14 @@ namespace Lego
 
             Console.WriteLine(c);
             Console.Beep();
-            Console.ReadKey();
-            Console.WriteLine(c.InLeftHand);
+            Console.ReadKey();*/
+            //Console.WriteLine(c.InLeftHand);
+            RockMonster r = new RockMonster("Niebieski gnuj",new Brick("Niebieski kloc"));
+            Console.WriteLine(r.body);
+            Console.WriteLine(r.name);
             Console.ReadKey();
         }
 
-        static void TrowOutIntoBox()
-        {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-        }
     }
 
     internal class Brick
@@ -35,25 +33,15 @@ namespace Lego
             this.name = name;
         }
 
-        ~Brick()
-        {
-            Console.WriteLine(name + " został wrzucony do pudełka");
-        }
-
         public override string ToString()
         {
             return name;
         }
     }
 
-    internal class Character
+    internal abstract class Character
     {
-        public string name { get; }
-        public Brick top_head { get; set; }
-        public Brick head { get; set; }
-        public Brick between_head_and_torso { get; set; }
-        public Brick arms_and_torso { get; set; }
-        public Brick legs { get; set; }
+        public string name { get; set; }
 
         private Brick in_right_hand;
 
@@ -73,7 +61,7 @@ namespace Lego
         }
 
         private Brick in_left_hand;
-        
+
         public Brick InLeftHand
         {
             get
@@ -89,7 +77,22 @@ namespace Lego
             }
         }
 
-        public Character(string name, Brick top_head, Brick head, Brick between_head_and_torso, Brick arms_and_torso, Brick legs)
+        public void WaveHand()
+        {
+            Console.WriteLine(name + " macha do Ciebie");
+        }
+
+    }
+
+    internal class Human:Character 
+    {
+        public Brick top_head { get; set; }
+        public Brick head { get; set; }
+        public Brick between_head_and_torso { get; set; }
+        public Brick arms_and_torso { get; set; }
+        public Brick legs { get; set; }
+
+        public Human(string name, Brick top_head, Brick head, Brick between_head_and_torso, Brick arms_and_torso, Brick legs)
         {
             this.name = name;
             this.top_head = top_head;
@@ -99,19 +102,14 @@ namespace Lego
             this.legs = legs;
         }
 
-        public Character(string name, Brick top_head, Brick head, Brick arms_and_torso, Brick legs)
+        public Human(string name, Brick top_head, Brick head, Brick arms_and_torso, Brick legs)
         {
             this.name = name;
             this.top_head = top_head;
             this.head = head;
-            between_head_and_torso = null;
+            this.between_head_and_torso = null;
             this.arms_and_torso = arms_and_torso;
             this.legs = legs;
-        }
-
-        public void WaveHand()
-        {
-            Console.WriteLine(name + " macha do Ciebie");
         }
 
         public override string ToString()
@@ -123,5 +121,18 @@ namespace Lego
                 + arms_and_torso.ToString() + "\n"
                 + legs.ToString();
         }
+    }
+
+    internal class RockMonster : Character
+    {
+        public Brick body { get; }
+
+        public RockMonster(string name,Brick body)
+        {
+            this.name = name;
+            this.body = body;
+        }
+
+
     }
 }
