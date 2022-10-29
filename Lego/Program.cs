@@ -6,22 +6,9 @@ namespace Lego
     {
         static void Main(string[] args)
         {
-            RockMonster c = new RockMonster("Czerwony stwór",
-                new Brick("Czerwony kloc"),
-                new Brick("Czerwony kryształ"));
-            Console.WriteLine(c);
-            Console.Beep();
-            Console.ReadKey();
-            c.Eaten = new Brick("Niebieski kryształ");
-            c.top_head = new Brick("");
             Console.ReadKey();
         }
 
-        static void TrowOutIntoBox()
-        {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-        }
     }
 
     internal class Brick
@@ -31,11 +18,6 @@ namespace Lego
         internal Brick(string name)
         {
             this.name = name;
-        }
-
-        ~Brick()
-        {
-            Console.WriteLine(name + " został wrzucony do pudełka");
         }
 
         public override string ToString()
