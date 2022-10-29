@@ -19,11 +19,6 @@ namespace Lego
             Console.ReadKey();
         }
 
-        static void TrowOutIntoBox()
-        {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-        }
     }
 
     internal class Brick
@@ -33,11 +28,6 @@ namespace Lego
         internal Brick(string name)
         {
             this.name = name;
-        }
-
-        ~Brick()
-        {
-            Console.WriteLine(name + " został wrzucony do pudełka");
         }
 
         public override string ToString()
