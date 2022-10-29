@@ -13,9 +13,11 @@ namespace Lego
                 new Brick("Niebieskie spodnie"));
 
             Console.WriteLine(c);
+            Console.WriteLine();
             Console.Beep();
             Console.ReadKey();
-            Console.WriteLine(c.InLeftHand);
+            c = null;
+            TrowOutIntoBox();
             Console.ReadKey();
         }
 
@@ -107,6 +109,11 @@ namespace Lego
             between_head_and_torso = null;
             this.arms_and_torso = arms_and_torso;
             this.legs = legs;
+        }
+
+        ~Character()
+        {
+            Console.WriteLine(name+" została rozłożona");
         }
 
         public void WaveHand()
