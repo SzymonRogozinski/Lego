@@ -36,6 +36,7 @@ namespace Lego
                 new Brick("Długa suknia: góra"),
                 new Brick("Długa suknia: dół"));
 
+            Console.ReadKey();
             Console.WriteLine(cavewoman);
             Console.WriteLine();
             Console.ReadKey();
