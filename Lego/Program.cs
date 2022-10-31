@@ -6,18 +6,68 @@ namespace Lego
     {
         static void Main(string[] args)
         {
-            Character c = new Character("Skate kid",
-                new Brick("Czerwona czapka"),
-                new Brick("Żółta głowa"),
-                new Brick("Koszula w kratę"),
-                new Brick("Niebieskie spodnie"));
-
-            Console.WriteLine(c);
+            Playground();
+            Console.WriteLine("Pora posprzątać");
             Console.WriteLine();
-            Console.Beep();
-            Console.ReadKey();
-            c = null;
             TrowOutIntoBox();
+            Console.Read();
+        }
+
+        private static void Playground()
+        {
+            Character cavewoman = new Character("Pani jaskiniowiec",
+                new Brick("Bujna fryzura z kością"),
+                new Brick("Żółta zdziwiona głowa"),
+                new Brick("Koszulka ze skór zwierzęcych"),
+                new Brick("Spodnie ze skór zwierzęcych"));
+
+            Character wizard = new Character("Czarodziej",
+                new Brick("Czapka Czarodzieja"),
+                new Brick("Żółta poważna twarz"),
+                new Brick("Długa broda"),
+                new Brick("Szara koszulka"),
+                new Brick("Szare spodnie"));
+
+            Character panda = new Character("Kobieta w stroju pandy",
+                new Brick("Długie włosy"),
+                new Brick("Uśmiechnięta twarz"),
+                new Brick("Kostium pandy: koszulka"),
+                new Brick("Kostium pandy: spodnie"));
+
+            Character liberty = new Character("Statua wolności",
+                new Brick("Korona"),
+                new Brick("Zielona twarz"),
+                new Brick("Długa suknia: góra"),
+                new Brick("Długa suknia: dół"));
+
+            Console.WriteLine(cavewoman);
+            Console.WriteLine();
+            Console.ReadKey();
+
+            Console.WriteLine(wizard);
+            Console.WriteLine();
+            Console.ReadKey();
+
+            Console.WriteLine(panda);
+            Console.WriteLine();
+            Console.ReadKey();
+            panda.top_head = new Brick("Maska pandy");
+            Console.WriteLine(panda);
+            Console.WriteLine();
+            Console.ReadKey();
+
+            Console.WriteLine(liberty);
+            Console.WriteLine();
+            Console.ReadKey();
+            liberty.InRightHand = new Brick("Pochodnia");
+            Console.WriteLine();
+            Console.ReadKey();
+
+            cavewoman.WaveHand();
+            wizard.WaveHand();
+            panda.WaveHand();
+            liberty.WaveHand();
+            Console.WriteLine();
             Console.ReadKey();
         }
 
