@@ -6,7 +6,6 @@ namespace Lego
     {
         static void Main(string[] args)
         {
-
             Console.ReadKey();
         }
 
